@@ -5,6 +5,7 @@ def remove_top_noise_and_keep_first_white(image_path, top_percent=0.90, top_marg
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     if image is None:
         raise IOError(f"Failed to load the image: {image_path}")
+#def remove_top_noise_and_keep_first_white(img, top_percent=0.90, top_margin=5, apply_closing=True):
 
     hist, bins = np.histogram(image.flatten(), bins=256, range=[0, 256])
     cdf = hist.cumsum()
