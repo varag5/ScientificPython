@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
 
-#def remove_top_noise_and_keep_first_white(image, top_percent=0.90, top_margin=5, apply_closing=True):#image_path, top_percent=0.90, top_margin=5, apply_closing=True):
-def mask(image, top_percent=0.93, top_margin=5, apply_closing=True):#image_path, top_percent=0.90, top_margin=5, apply_closing=True):
+def mask(image, top_percent=0.93, top_margin=5, apply_closing=True):
 
     hist, bins = np.histogram(image.flatten(), bins=256, range=[0, 256])
     cdf = hist.cumsum()
@@ -37,4 +36,4 @@ def mask(image, top_percent=0.93, top_margin=5, apply_closing=True):#image_path,
     smooth_mask_normalized = smooth_mask.astype(np.float32) / 255.0
     masked_image = (image.astype(np.float32) * smooth_mask_normalized).astype(np.uint8)
 
-    return masked_image#image, threshold_value, smooth_mask, masked_image
+    return masked_image
