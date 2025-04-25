@@ -37,7 +37,6 @@ class VolumeTransformer:
 
         self.frame_width, self.frame_depth = frame_width, frame_depth
         self.frame_THETA = np.linspace(self.thetas[0], self.thetas[1], self.frame_width)
-        #self.frame_depth = 
         self.frame_R = np.linspace(offset, depth+offset, self.frame_depth)
 
         self.create_image_volume()
@@ -264,21 +263,3 @@ def interp_img(frame, depth, alpha, offset_frame, offset=0, resolution=0.01):
 
 if __name__ == "__main__":
     pass
-    '''depth = 8.65#6
-    thetas = (-np.pi/3, np.pi/3)
-    #alpha = 84/180/2*np.pi
-    alpha = 35/180*np.pi
-    thetas = (-alpha, alpha)
-    offset = 0#1.37 #0
-    offset_frame = 1.37
-    resolution = 0.01
-    path = "C:\\Users\\buvr_\\Documents\\BUVR 2025.1\\Korea\\SouthKorea2025\\data\\masked_image_Marcitol_kapott_egyenes_2.png"#masked_image.png"
-
-    frame = interp(path, depth, thetas, alpha, offset, offset_frame, resolution)
-
-    plt.imshow(frame, cmap="gray")
-    plt.show()
-
-
-
-'''
