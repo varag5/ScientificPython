@@ -84,7 +84,7 @@ class VolumeTransformer:
 
     def create_image_volume(self):
         """
-        Create the 3D cartesian (X,Y,Z) and equivalent spherical coordinates of the image volume, and a mask for the cone of interest
+        Create the cartesian and equivalent spherical coordinates of the image volume, and a mask for the cone of interest
         """
 
         R, THETA = np.meshgrid(self.frame_R, self.frame_THETA,  indexing='ij')
