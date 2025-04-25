@@ -172,51 +172,6 @@ class VolumeTransformer:
 
 
 
-def interp(path, depth, alpha, offset_frame, offset=0, resolution=0.01):
-    """
-    Interpolates the image using the VolumeTransformer class.
-
-    Args:
-        path (str): Path to the image file.
-        depth (float): Depth of the frustum.
-        thetas (Tuple[float, float]): The range of theta values.
-        alpha (float): Half angle of the ultrasound device in radians.
-        offset (float): Offset value between the top of the frame and the US source.
-        offset_frame (float): Offset value for the frame.
-        resolution (float): Resolution value for upscaling or downscaling.
-
-    Returns:
-        np.ndarray: Interpolated frame.
-    """
-    thetas = (-alpha, alpha)
-    offset = 0
-
-    # Read and process the image
-    frame = read_png_colored(path).T
-    frame_width, frame_depth = frame.shape
-
-    # Create padded frame
-    offset_row = int(frame_depth / depth * offset_frame)
-    padded_frame = np.zeros((frame_width, offset_row + frame_depth))
-    padded_frame[:, offset_row:] = frame[:, :]
-
-    # Update depth
-    frame = padded_frame
-    frame_depth = frame.shape[1]  # must match actual depth now
-
-    # Pass correct dimensions
-    transformer = VolumeTransformer(frame_width, frame_depth, depth, thetas, offset, resolution, straighten_volume=True)
-
-    interpolated_frame = transformer.trilinear_interpolation(frame.astype(np.float32))
-    
-    return interpolated_frame.T
-
-
-
-
-
-
-
 def interp_img(frame, depth, alpha, offset_frame, offset=0, resolution=0.01):
     """
     Interpolates the image using the VolumeTransformer class.
@@ -237,7 +192,6 @@ def interp_img(frame, depth, alpha, offset_frame, offset=0, resolution=0.01):
     offset = 0
 
     # Read and process the image
-    #frame = read_png_colored(path).T
     frame = frame.T
     frame_width, frame_depth = frame.shape
 
